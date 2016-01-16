@@ -6,12 +6,14 @@ This project contains information to help getting started creating a Graylog ser
 
 Graylog Collector configuration.
 ------------------------------------
-
+### add some detail about this
 
 
 
 Extractors
 ------------------------------------
+### add some detail about this
+
 
 
 
