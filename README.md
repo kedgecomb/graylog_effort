@@ -8,10 +8,19 @@ Graylog Master Server Setup
 
 #### Installation and Setup
 
+##### We used the Graylog image for Open Stack
+
 #### Adding Input and Extractors
 
+##### Inputs
+In order for the GL Master Server to receive input from remote applications, you will at a minimum need a TCP GELF input.  Collectors only push log entries using TCP and we used the Moocar Logback appender to transmit TCP as well.  We also wanted to be able to load some historical log files (in case we wanted to do some trend analysis).  To do this you will need a UDP GELF input to receive the Logstash input.  
+
+Make sure to note the ports used for each of the inputs and use them respectively when setting up the collectors, pipelines, or appenders.
+
+Extractors are necessary on the GELF inputs, but the same set of can be used on both UDP and TCP inputs listening to applications using similar logging systems/formats.  
+
+
 ##### Extractors
-------------------------------------
 Extractors are used to format or perform conversion on incoming messages received by Graylog inputs.  The goal of extraction should be to extract and normalize enough data from the raw data contained in each message to  enable querying the data, providing useable results.  Each input containing a different or new message format will require a new set of extractors, tailored to parse the data appropriately. 
 
 
