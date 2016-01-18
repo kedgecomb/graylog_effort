@@ -6,11 +6,11 @@ This project contains information to help getting started creating a Graylog ser
 Graylog Master Server Setup
 ---------------------------
 
-#### Installation and Setup
+### Installation and Setup
 
 ##### We used the Graylog image for Open Stack
 
-#### Adding Input and Extractors
+### Adding Input and Extractors
 
 ##### Inputs
 In order for the GL Master Server to receive input from remote applications, you will at a minimum need a TCP GELF input.  Collectors only push log entries using TCP and we used the Moocar Logback appender to transmit TCP as well.  We also wanted to be able to load some historical log files (in case we wanted to do some trend analysis).  To do this you will need a UDP GELF input to receive the Logstash input.  
@@ -27,7 +27,7 @@ Extractors are used to format or perform conversion on incoming messages receive
 Providing Input to the Master GL Server
 ---------------------------------------
 
-#### Tailing Existing Log Files from Remote Applications
+### Tailing Existing Log Files from Remote Applications
 
 ##### Graylog Collector
 To continuously watch a remote application's current logfile for new entries (think tail) use a Graylog Collector.  Collectors use TCP to send log messages to the GL master server.
@@ -72,9 +72,10 @@ pscp logstash_pipeline.conf root@<remote_logging_machine_ip>:/<logstash_home>/lo
 bin/logstash -f logstash_pipeline.conf
 
 
-#### Sending Log Entries Directly from a Remote Application 
+### Sending Log Entries Directly from a Remote Application 
 
-##### To change an application to directly sent log entries to GL, use an appender.  
+##### Logging Appender 
+To change an application to directly sent log entries to GL, use an appender.  
 
 An example appender using the GELF classes from Moocar:
 
