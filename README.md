@@ -53,21 +53,21 @@ To continuously watch a remote application's current logfile for new entries (th
 To pipe old (not-current) log files into Graylog, use a logstash pipeline to process files individually and push entries to the master GL server. 
 
 -- Install Logstash  
-> download logstash  
-> ``wget https://download.elastic.co/logstash/logstash/logstash-2.1.1.tar.gz``  
+* download logstash  
+ ``wget https://download.elastic.co/logstash/logstash/logstash-2.1.1.tar.gz``  
 
-> move the tar to /<logstash_intallation_path>/logstash-2.1.1 and unpack using:  
-> ``tar -zxvf logstash-2.1.1.tar.gz``  
+* move the tar to /<logstash_intallation_path>/logstash-2.1.1 and unpack using:  
+ ``tar -zxvf logstash-2.1.1.tar.gz``  
 
 -- Setting up the config  
-> copy the sample logstash config to the installation directory (I used PuTTy):  
-> ``pscp logstash_pipeline.conf root@<remote_logging_machine_ip>:/<logstash_home>/logstash-2.1.1``  
+* copy the sample logstash config to the installation directory (I used PuTTy):  
+ ``pscp logstash_pipeline.conf root@<remote_logging_machine_ip>:/<logstash_home>/logstash-2.1.1``  
 
 -- Starting logstash pipeline from command line  
-> modify the config to point to the GL master server and use any new ports if any new inputs were created on the GL master.  
-> modify the config for each logfile to pipe  
-> from the logstash home directory (installation directory) run:  
-> ``bin/logstash -f logstash_pipeline.conf``  
+* modify the config to point to the GL master server and use any new ports if any new inputs were created on the GL master.  
+* modify the config for each logfile to pipe  
+* from the logstash home directory (installation directory) run:  
+ ``bin/logstash -f logstash_pipeline.conf``  
 
 
 ### Sending Log Entries Directly from a Remote Application 
