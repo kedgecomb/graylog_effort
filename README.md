@@ -17,7 +17,7 @@ In order for the GL Master Server to receive input from remote applications, you
 
 Make sure to note the ports used for each of the inputs and use them respectively when setting up the collectors, pipelines, or appenders.
 
-Extractors are necessary on the GELF inputs, but the same set of can be used on both UDP and TCP inputs listening to applications using similar logging systems/formats.  
+Extractors are necessary on the GELF inputs, but the same set of extractors can be used on both UDP and TCP inputs listening to applications using similar logging systems/formats.  
 
 
 ##### Extractors
