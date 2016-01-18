@@ -1,12 +1,14 @@
 Graylog configurations
-=======================
+======================
 
 This project contains information to help getting started creating a Graylog server instance. Included are server configurations files for Graylog collector, Logstash pipelines, and custom Extractors for dealing with Java Stack traces and logback default output format.
 
+Providing Input to the Master GL Server
+---------------------------------------
 
-Graylog Collector configuration.
-------------------------------------
-### To continuously watch a remote application's current logfile for new entries (think tail) use a Graylog Collector.  Collectors use TCP to send log messages to the GL master server.
+#### Tailing Existing Log Files from Remote Applications
+
+##### To continuously watch a remote application's current logfile for new entries (think tail) use a Graylog Collector.  Collectors use TCP to send log messages to the GL master server.
 
 -- Install Graylog Collector 
 > download the collector
@@ -26,11 +28,7 @@ pscp graylog_collector.conf root@<remote_logging_machine_ip>:/<graylog_home>/gra
 bin/graylog-collector run -f graylog_collector.conf
 
 
-
-
-Logstash Pipeline configuration.
-------------------------------------
-### To pipe old (not-current) log files into Graylog, use a logstash pipeline to process files individually and push entries to the master GL server. 
+##### To pipe old (not-current) log files into Graylog, use a logstash pipeline to process files individually and push entries to the master GL server. 
 
 -- Install Logstash 
 > download logstash
@@ -51,6 +49,9 @@ pscp logstash_pipeline.conf root@<remote_logging_machine_ip>:/<logstash_home>/lo
 bin/logstash -f logstash_pipeline.conf
 
 
+#### Using an Appender to Send Remote Application Log Entries Directly
+
+##### To change an application to directly sent log entries to GL, use an appender.  
 
 
 Extractors
