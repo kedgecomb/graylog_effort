@@ -63,10 +63,36 @@ pscp logstash_pipeline.conf root@<remote_logging_machine_ip>:/<logstash_home>/lo
 bin/logstash -f logstash_pipeline.conf
 
 
-#### Using an Appender to Send Remote Application Log Entries Directly
+#### Sending Log Entries Directly from a Remote Application 
 
 ##### To change an application to directly sent log entries to GL, use an appender.  
 
+An example appender using the GELF classes from Moocar:
+
+    <appender name="GELF TCP APPENDER" class="me.moocar.logback.net.SocketEncoderAppender">
+        <remoteHost>10.49.5.99</remoteHost>
+        <port>12202</port>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="me.moocar.logbackgelf.GelfLayout">
+                <!--An example of overwriting the short message pattern-->
+                <shortMessageLayout class="ch.qos.logback.classic.PatternLayout">
+                    <pattern>%m%n%ex{short}</pattern>
+                </shortMessageLayout>
+                <!-- Using full_message to store the stacktrace for esceptions -->
+                <fullMessageLayout class="ch.qos.logback.classic.PatternLayout">
+                    <pattern>%ex{full}</pattern> <!-- %relative%thread%mdc%level%logger%msg -->
+                </fullMessageLayout>
+                <useLoggerName>true</useLoggerName>
+                <useThreadName>true</useThreadName>
+                <useMarker>true</useMarker>
+                <host>UASNY</host>
+                <additionalField>ipAddress:_ip_address</additionalField>
+                <additionalField>requestId:_request_id</additionalField>
+                <includeFullMDC>true</includeFullMDC>
+                <fieldType>requestId:long</fieldType>
+            </layout>
+        </encoder>
+    </appender>
 
 
 
