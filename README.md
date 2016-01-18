@@ -3,12 +3,25 @@ Graylog configurations
 
 This project contains information to help getting started creating a Graylog server instance. Included are server configurations files for Graylog collector, Logstash pipelines, and custom Extractors for dealing with Java Stack traces and logback default output format.
 
+Graylog Master Server Setup
+---------------------------
+
+#### Installation and Setup
+
+#### Adding Input and Extractors
+
+##### Extractors
+------------------------------------
+Extractors are used to format or perform conversion on incoming messages received by Graylog inputs.  The goal of extraction should be to extract and normalize enough data from the raw data contained in each message to  enable querying the data, providing useable results.  Each input containing a different or new message format will require a new set of extractors, tailored to parse the data appropriately. 
+
+
 Providing Input to the Master GL Server
 ---------------------------------------
 
 #### Tailing Existing Log Files from Remote Applications
 
-##### To continuously watch a remote application's current logfile for new entries (think tail) use a Graylog Collector.  Collectors use TCP to send log messages to the GL master server.
+##### Graylog Collector
+To continuously watch a remote application's current logfile for new entries (think tail) use a Graylog Collector.  Collectors use TCP to send log messages to the GL master server.
 
 -- Install Graylog Collector 
 > download the collector
@@ -28,7 +41,8 @@ pscp graylog_collector.conf root@<remote_logging_machine_ip>:/<graylog_home>/gra
 bin/graylog-collector run -f graylog_collector.conf
 
 
-##### To pipe old (not-current) log files into Graylog, use a logstash pipeline to process files individually and push entries to the master GL server. 
+##### Logstash Pipeline 
+To pipe old (not-current) log files into Graylog, use a logstash pipeline to process files individually and push entries to the master GL server. 
 
 -- Install Logstash 
 > download logstash
@@ -53,10 +67,6 @@ bin/logstash -f logstash_pipeline.conf
 
 ##### To change an application to directly sent log entries to GL, use an appender.  
 
-
-Extractors
-------------------------------------
-### Extractors are used to format or perform conversion on incoming messages received by Graylog inputs.  The goal of extraction should be to extract and normalize enough data from the raw data contained in each message to  enable querying the data, providing useable results.  Each input containing a different or new message format will require a new set of extractors, tailored to parse the data appropriately. 
 
 
 
