@@ -7,6 +7,8 @@
     <property name="LOG_DIRECTORY" value="${appserver.private.output:-${LOG_DIRECTORY_DEFAULT}}" />
     <property name="DEFAULT_CIMINC_LOG_LEVEL" value="INFO" />
     <property name="CIMINC_LOG_LEVEL" value="${appserver.ciminc.log.level:-${DEFAULT_CIMINC_LOG_LEVEL}}" />
+    <property name="GRAYLOG_SERVER_IP" value="${graylog.server.ip}" />
+    <property name="GRAYLOG_LOGBACK_TCP_GELF_INPUT_PORT" value="${graylog.server.port}" />
     <timestamp key="byDay" datePattern="yyyyMMdd"/>
     <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />  
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
@@ -38,26 +40,31 @@
         <appender-ref ref="compass-con"/>        
     </appender>
     <appender name="GELF TCP APPENDER" class="me.moocar.logback.net.SocketEncoderAppender">
-        <remoteHost>10.49.5.99</remoteHost>
-        <port>12202</port>
+        <remoteHost>${GRAYLOG_SERVER_IP}</remoteHost>
+        <port>${GRAYLOG_LOGBACK_TCP_GELF_INPUT_PORT}</port>
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="me.moocar.logbackgelf.GelfLayout">
-                <!--An example of overwriting the short message pattern-->
                 <shortMessageLayout class="ch.qos.logback.classic.PatternLayout">
                     <pattern>%m%n%ex{short}</pattern>
                 </shortMessageLayout>
-                <!-- Using full_message to store the stacktrace for esceptions -->
                 <fullMessageLayout class="ch.qos.logback.classic.PatternLayout">
                     <pattern>%ex{full}</pattern> <!-- %relative%thread%mdc%level%logger%msg -->
                 </fullMessageLayout>
                 <useLoggerName>true</useLoggerName>
                 <useThreadName>true</useThreadName>
                 <useMarker>true</useMarker>
-                <host>UASNY</host>
-                <additionalField>ipAddress:_ip_address</additionalField>
-                <additionalField>requestId:_request_id</additionalField>
-                <includeFullMDC>true</includeFullMDC>
-                <fieldType>requestId:long</fieldType>
+                <staticField class="me.moocar.logbackgelf.Field">
+                    <key>app_name</key>
+                    <value>UASNY</value>
+                </staticField>
+                <staticField class="me.moocar.logbackgelf.Field">
+                    <key>app_instance</key>
+                    <value>KEV-1</value>
+                </staticField>
+                <staticField class="me.moocar.logbackgelf.Field">
+                    <key>app_version</key>
+                    <value>1.0.35</value>
+                </staticField>
             </layout>
         </encoder>
     </appender>
