@@ -21,7 +21,9 @@ Extractors are necessary on the GELF inputs, but the same set of extractors can 
 
 
 ##### Extractors
-Extractors are used to format or perform conversion on incoming messages received by Graylog inputs.  The goal of extraction should be to extract and normalize enough data from the raw data contained in each message to  enable querying the data, providing useable results.  Each input containing a different or new message format will require a new set of extractors, tailored to parse the data appropriately. 
+Extractors are used to format or perform conversion on incoming messages received by Graylog inputs.  The goal of extraction should be to extract and normalize enough data from the raw data contained in each message to  enable querying the data, providing useable results.  Each input containing a different or new message format will require a new set of extractors, tailored to parse the data appropriately.  
+  
+For this reason, inputs should be named after the overall "flavor" of extraction that they do, rather than a particular client application or instance.  In our case, the extraction necessary for an application using Logback and running on WLS was much different than the extraction required for an application using Logback but running on Glassfish.  We named our inputs *logback_default_extraction_input* and *logback_glassfish_extraction_input* because the WLS and logback config seemed to be a more normalized format.
 
 
 Providing Input to the Master GL Server
@@ -78,26 +80,31 @@ To change an application to directly sent log entries to GL, use an appender.
 An example appender using the GELF classes from Moocar:
 
     <appender name="GELF TCP APPENDER" class="me.moocar.logback.net.SocketEncoderAppender">
-        <remoteHost>10.49.5.99</remoteHost>
-        <port>12202</port>
+        <remoteHost>${GRAYLOG_SERVER_IP}</remoteHost>
+        <port>${GRAYLOG_LOGBACK_TCP_GELF_INPUT_PORT}</port>
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="me.moocar.logbackgelf.GelfLayout">
-                <!--An example of overwriting the short message pattern-->
                 <shortMessageLayout class="ch.qos.logback.classic.PatternLayout">
                     <pattern>%m%n%ex{short}</pattern>
                 </shortMessageLayout>
-                <!-- Using full_message to store the stacktrace for esceptions -->
                 <fullMessageLayout class="ch.qos.logback.classic.PatternLayout">
                     <pattern>%ex{full}</pattern> <!-- %relative%thread%mdc%level%logger%msg -->
                 </fullMessageLayout>
                 <useLoggerName>true</useLoggerName>
                 <useThreadName>true</useThreadName>
                 <useMarker>true</useMarker>
-                <host>UASNY</host>
-                <additionalField>ipAddress:_ip_address</additionalField>
-                <additionalField>requestId:_request_id</additionalField>
-                <includeFullMDC>true</includeFullMDC>
-                <fieldType>requestId:long</fieldType>
+                <staticField class="me.moocar.logbackgelf.Field">
+                    <key>app_name</key>
+                    <value>UASNY</value>
+                </staticField>
+                <staticField class="me.moocar.logbackgelf.Field">
+                    <key>app_instance</key>
+                    <value>KEV-1</value>
+                </staticField>
+                <staticField class="me.moocar.logbackgelf.Field">
+                    <key>app_version</key>
+                    <value>1.0.35</value>
+                </staticField>
             </layout>
         </encoder>
     </appender>
