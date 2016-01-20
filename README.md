@@ -5,7 +5,7 @@ This project contains information to help getting started creating a Graylog ser
 
 We started looking at Graylog to save us from the tedious and time consuming process of searching through multiple log files on disparate server systems.  We wanted a centralized location for all of our logs and the ability to extract and query the relevant data.  And we wanted graphical dashboards to display the results of our queries.  But first and formost, we wanted alerts.  
   
-Looking thru logs and running queries over logs and browsing dashboards about logs is still just a little bit like picking up your phone every so often to see if anyone is calling you.  We wanted a way to create an alert system.  
+Looking thru logs and running queries over logs and browsing dashboards about logs is still just a little bit like picking up your phone every so often to see if someone is calling you.  We wanted a way to create an alert system.  
 
 When you install the Graylog server and add inputs however, you are still a long way from achieving any of these goals.  Log files come in many different formats and rarely are they populated with all the data needed to centralize them and still be able to determine their context or origin.  We needed to add these data elements and we needed to extract data that was included in each log entry and build a common collection of elements that could be easily queried, regardless of the source of the entries.  
 
