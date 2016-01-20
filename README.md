@@ -3,7 +3,7 @@ Graylog Pragmatic Use
 
 This project contains information to help getting started creating a Graylog server instance. Included are server configurations files for Graylog collector, Logstash pipelines, and custom Extractors for dealing with Java Stack traces and logback default output format.
 
-We started looking at Graylog to save us from the tedious and time consuming process of searching through multiple log files on disparate server systems.  We wanted a centralized location for all of our logs and the ability to extract and query the relevant data.  And we wanted graphical dashboards to display the results of our queries.  But first and formost, we wanted alerts.  
+We started looking at Graylog to save us from the tedious and time consuming process of searching through multiple log files on disparate server systems.  We wanted a centralized location for all of our logs and the ability to extract and query the relevant data.  And we wanted graphical dashboards to display the results of our queries.  But first and foremost, we wanted alerts.  
   
 Looking thru logs and running queries over logs and browsing dashboards about logs is still just a little bit like picking up your phone every so often to see if someone is calling you.  We wanted a way to create an alert system.  
 
