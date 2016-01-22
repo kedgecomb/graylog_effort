@@ -88,7 +88,16 @@ To pipe old (not-current) log files into Graylog, use a logstash pipeline to pro
 ### Sending Log Entries Directly from a Remote Application 
 
 ##### Logging Appender 
-To change an application to directly sent log entries to GL, use an appender.  
+To change an application to directly sent log entries to GL, use an appender.  At least two GELF appender plugins can be found on GitHub.  Logstash makes one and there is one authored by MOOCAR.  Each appender creates messages in its default format.  The formats can be altered each to some degree, but the alterations can only re-format to a point.  We chose MOOCAR because it started with a format very close to the structure we wanted and required very few modifications.
+
+To add the MOOCAR GELF appender classes to an application, add the following to the pom.xml:
+
+    <dependency>
+        <groupId>me.moocar</groupId>
+        <artifactId>logback-gelf</artifactId>
+        <version>0.3</version>
+    </dependency>
+
 
 An example appender using the GELF classes from Moocar:
 
