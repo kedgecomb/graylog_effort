@@ -104,7 +104,7 @@ An example appender using the GELF classes from Moocar:
 
     <appender name="GELF TCP APPENDER" class="me.moocar.logback.net.SocketEncoderAppender">
         <remoteHost>${GRAYLOG_SERVER_IP}</remoteHost>
-        <port>${GRAYLOG_LOGBACK_TCP_GELF_INPUT_PORT}</port>
+        <port>${GRAYLOG_SERVER_PORT}</port>
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="me.moocar.logbackgelf.GelfLayout">
                 <shortMessageLayout class="ch.qos.logback.classic.PatternLayout">
@@ -122,7 +122,7 @@ An example appender using the GELF classes from Moocar:
                 </staticField>
                 <staticField class="me.moocar.logbackgelf.Field">
                     <key>app_instance</key>
-                    <value>KEV-1</value>
+                    <value>${APPLICATION_INSTANCE}</value>
                 </staticField>
                 <staticField class="me.moocar.logbackgelf.Field">
                     <key>app_version</key>
@@ -133,5 +133,11 @@ An example appender using the GELF classes from Moocar:
     </appender>
 
 
+There is a UDP version of the appender from MOOCAR also, (see the attached source).
 
+These appender configuration samples assume the use of three jvm arguments at the container level:
+  
+*graylog.server.ip* - the ip address of the Graylog master server  
+*graylog.server.port* - the port number of the *gelfappender_input* setup to receive this GELF input
+*application_instance* - the instance of the running application (BIP-1, for instance) 
 
