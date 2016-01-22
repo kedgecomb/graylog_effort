@@ -138,6 +138,6 @@ There is a UDP version of the appender from MOOCAR also, (see the attached sourc
 These appender configuration samples assume the use of three jvm arguments at the container level:
   
 *graylog.server.ip* - the ip address of the Graylog master server  
-*graylog.server.port* - the port number of the *gelfappender_input* setup to receive this GELF input
-*application_instance* - the instance of the running application (BIP-1, for instance) 
+*graylog.server.port* - the port number of the *gelfappender_input* setup to receive this GELF input  
+*application_instance* - the instance of the running application (BIP-1, for instance)  
 
