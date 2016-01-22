@@ -1,0 +1,227 @@
+{
+  "extractors": [
+    {
+      "condition_type": "none",
+      "condition_value": "",
+      "converters": [],
+      "cursor_strategy": "copy",
+      "extractor_config": {
+        "regex": "T",
+        "replacement": " ",
+        "replace_all": false
+      },
+      "extractor_type": "regex_replace",
+      "order": 0,
+      "source_field": "message",
+      "target_field": "message",
+      "title": "Replace 'T' with a space in Timestamp"
+    },
+    {
+      "condition_type": "none",
+      "condition_value": "",
+      "converters": [
+        {
+          "type": "date",
+          "config": {
+            "date_format": "yyyy-MM-dd HH:mm:ss.SSS",
+            "time_zone": "US/Eastern"
+          }
+        }
+      ],
+      "cursor_strategy": "copy",
+      "extractor_config": {
+        "regex_value": "\\[#\\|(\\d\\d\\d\\d-\\d\\d-\\d\\d\\s\\d\\d:\\d\\d:\\d\\d.\\d\\d\\d)"
+      },
+      "extractor_type": "regex",
+      "order": 1,
+      "source_field": "message",
+      "target_field": "timestamp",
+      "title": "Timestamp Extractor"
+    },
+    {
+      "condition_type": "none",
+      "condition_value": "",
+      "converters": [],
+      "cursor_strategy": "copy",
+      "extractor_config": {
+        "regex": "\\[#\\|\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2}.\\d{3}-0500\\|",
+        "replacement": "L",
+        "replace_all": false
+      },
+      "extractor_type": "regex_replace",
+      "order": 2,
+      "source_field": "message",
+      "target_field": "message",
+      "title": "Timestamp Remover"
+    },
+    {
+      "condition_type": "regex",
+      "condition_value": "^(LFINER)",
+      "converters": [],
+      "cursor_strategy": "copy",
+      "extractor_config": {
+        "regex": "(LFINER.*)",
+        "replacement": "7",
+        "replace_all": false
+      },
+      "extractor_type": "regex_replace",
+      "order": 4,
+      "source_field": "message",
+      "target_field": "level",
+      "title": "FINER Level Conversion"
+    },
+    {
+      "condition_type": "regex",
+      "condition_value": "^(LFINEST)",
+      "converters": [],
+      "cursor_strategy": "copy",
+      "extractor_config": {
+        "regex": "(LFINEST.*)",
+        "replacement": "8",
+        "replace_all": false
+      },
+      "extractor_type": "regex_replace",
+      "order": 3,
+      "source_field": "message",
+      "target_field": "level",
+      "title": "FINEST Level Conversion"
+    },
+    {
+      "condition_type": "regex",
+      "condition_value": "^(LFINE)",
+      "converters": [],
+      "cursor_strategy": "copy",
+      "extractor_config": {
+        "regex": "(LFINE.*)",
+        "replacement": "7",
+        "replace_all": false
+      },
+      "extractor_type": "regex_replace",
+      "order": 5,
+      "source_field": "message",
+      "target_field": "level",
+      "title": "FINE Level Conversion"
+    },
+    {
+      "condition_type": "none",
+      "condition_value": "",
+      "converters": [],
+      "cursor_strategy": "copy",
+      "extractor_config": {
+        "regex": "(LINFO.*)",
+        "replacement": "6",
+        "replace_all": false
+      },
+      "extractor_type": "regex_replace",
+      "order": 7,
+      "source_field": "message",
+      "target_field": "level",
+      "title": "INFO Level Conversion"
+    },
+    {
+      "condition_type": "regex",
+      "condition_value": "^(LWARNING)",
+      "converters": [],
+      "cursor_strategy": "copy",
+      "extractor_config": {
+        "regex": "(LWARNING.*)",
+        "replacement": "4",
+        "replace_all": false
+      },
+      "extractor_type": "regex_replace",
+      "order": 8,
+      "source_field": "message",
+      "target_field": "level",
+      "title": "WARNING Level Conversion"
+    },
+    {
+      "condition_type": "regex",
+      "condition_value": "^(LSEVERE)",
+      "converters": [],
+      "cursor_strategy": "copy",
+      "extractor_config": {
+        "regex": "(LSEVERE.*)",
+        "replacement": "3",
+        "replace_all": false
+      },
+      "extractor_type": "regex_replace",
+      "order": 9,
+      "source_field": "message",
+      "target_field": "level",
+      "title": "SEVERE Level Conversion"
+    },
+    {
+      "condition_type": "none",
+      "condition_value": "",
+      "converters": [],
+      "cursor_strategy": "copy",
+      "extractor_config": {
+        "regex_value": "^L.*?\\|oracle-glassfish.*?\\|(.*?)\\|"
+      },
+      "extractor_type": "regex",
+      "order": 10,
+      "source_field": "message",
+      "target_field": "loggerName",
+      "title": "LoggerName Extractor"
+    },
+    {
+      "condition_type": "none",
+      "condition_value": "",
+      "converters": [],
+      "cursor_strategy": "copy",
+      "extractor_config": {
+        "regex_value": "^L.*?\\|oracle-glassfish.*?\\|.*?\\|.*?\\|(.*?)\\|#\\]"
+      },
+      "extractor_type": "regex",
+      "order": 12,
+      "source_field": "message",
+      "target_field": "message",
+      "title": "Substring message into message"
+    },
+    {
+      "condition_type": "none",
+      "condition_value": "",
+      "converters": [],
+      "cursor_strategy": "copy",
+      "extractor_config": {
+        "regex_value": "(.*?(\\n).*?(\\n).*?)(\\n)"
+      },
+      "extractor_type": "regex",
+      "order": 13,
+      "source_field": "message",
+      "target_field": "message",
+      "title": "Truncate Short Message"
+    },
+    {
+      "condition_type": "regex",
+      "condition_value": "(\\n)",
+      "converters": [],
+      "cursor_strategy": "copy",
+      "extractor_config": {
+        "regex_value": "^L.*?\\|oracle-glassfish.*?\\n(.*)\\|#\\]"
+      },
+      "extractor_type": "regex",
+      "order": 11,
+      "source_field": "message",
+      "target_field": "full_message",
+      "title": "Substring message into full_message"
+    },
+    {
+      "condition_type": "regex",
+      "condition_value": "8 ^(LCONFIG)",
+      "converters": [],
+      "cursor_strategy": "copy",
+      "extractor_config": {
+        "regex": "(LCONFIG.*)",
+        "replacement": "6",
+        "replace_all": false
+      },
+      "extractor_type": "regex_replace",
+      "order": 6,
+      "source_field": "message",
+      "target_field": "level",
+      "title": "CONFIG Level Conversion"
+    }
+  ],
+  "version": "1.3.2 (e7c49b6)"
+}
