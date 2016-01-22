@@ -33,10 +33,11 @@ Extractors are necessary on the GELF inputs, but the same set of extractors can 
 ##### Extractors
 Extractors are used to format or perform conversion on incoming messages received by Graylog inputs.  The goal of extraction should be to extract and normalize enough data from the raw data contained in each message to  enable querying the data, providing useable results.  Each input containing a different or new message format will require a new set of extractors, tailored to parse the data appropriately.  
   
-For this reason, inputs should be named after the overall "flavor" of extraction that they do, rather than a particular client application or instance.  In our case, the extraction necessary for an application using Logback and running on WLS was much different than the extraction required for an application using Logback but running on Glassfish.  Because the WLS and logback config seemed to be a more normalized format, we named our inputs as shown:  
+For this reason, inputs should be named after the overall "flavor" of extraction that they do, rather than a particular client application or instance.  In our case, the extraction necessary for an application using Logback and running on WLS was much different than the extraction required for an application using java utility logging running on Glassfish.  GELF appenders require no extraction, so we named our inputs as shown:  
   
 *logback_default_extraction_input*  
-*logback_glassfish_extraction_input*  
+*glassfish_default_extraction_input*  
+*gelfappender_input*
   
 
 Providing Input to the Master GL Server
