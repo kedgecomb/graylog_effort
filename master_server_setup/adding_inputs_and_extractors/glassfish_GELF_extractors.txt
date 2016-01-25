@@ -156,7 +156,7 @@
       "converters": [],
       "cursor_strategy": "copy",
       "extractor_config": {
-        "regex_value": "^L.*?\\|oracle-glassfish.*?\\|(.*?)\\|"
+        "regex_value": "^L.*?\\|.*glassfish.*?\\|(.*?)\\|"
       },
       "extractor_type": "regex",
       "order": 10,
