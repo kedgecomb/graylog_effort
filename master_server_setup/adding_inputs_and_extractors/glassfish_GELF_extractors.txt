@@ -156,7 +156,7 @@
       "converters": [],
       "cursor_strategy": "copy",
       "extractor_config": {
-        "regex_value": "^L.*?\\|.*glassfish.*?\\|(.*?)\\|"
+        "regex_value": "^L.*?\\|.*?glassfish.*?\\|(.*?)\\|"
       },
       "extractor_type": "regex",
       "order": 10,
@@ -170,7 +170,7 @@
       "converters": [],
       "cursor_strategy": "copy",
       "extractor_config": {
-        "regex_value": "^L.*?\\|oracle-glassfish.*?\\|.*?\\|.*?\\|(.*?)\\|#\\]"
+        "regex_value": "^L.*?\\|.*?glassfish.*?\\|.*?\\|.*?\\|(.*?)\\|#\\]"
       },
       "extractor_type": "regex",
       "order": 12,
@@ -198,7 +198,7 @@
       "converters": [],
       "cursor_strategy": "copy",
       "extractor_config": {
-        "regex_value": "^L.*?\\|oracle-glassfish.*?\\n(.*)\\|#\\]"
+        "regex_value": "^L.*?\\|.*?glassfish.*?\\n(.*)\\|#\\]"
       },
       "extractor_type": "regex",
       "order": 11,
