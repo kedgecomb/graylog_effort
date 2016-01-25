@@ -65,6 +65,10 @@
                     <key>app_version</key>
                     <value>1.0.35</value>
                 </staticField>
+                <staticField class="me.moocar.logbackgelf.Field">
+                    <key>environment</key>
+                    <value>QA</value>
+                </staticField>
             </layout>
         </encoder>
     </appender>
