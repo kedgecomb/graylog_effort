@@ -49,41 +49,47 @@ Providing Input to the Master GL Server
 To continuously watch a remote application's current logfile for new entries (think tail) use a Graylog Collector.  Collectors use TCP to send log messages to the GL master server.
 
 -- Install Graylog Collector  
-* download the collector:  
+* cd to the applications home folder (for us, */ciminc/app/* and download the latest version of the collector:  
  ``wget https://packages.graylog2.org/releases/graylog-collector/graylog-collector-0.4.2.tgz``  
-
-* move the tar to /<graylog_intallation_path>/graylog-collector and unpack using:  
+  
+* unpack using:  
  ``tar -zxvf graylog-collector-0.4.2.tgz``  
+
+* rename the unpacked folder from *graylog-collector-0.4.2* to *graylog-collector* and delete the tar
 
 -- Setting up the config  
 * copy the sample collector config to the config directory (I used PuTTy):  
- ``pscp graylog_collector.conf root@<remote_logging_machine_ip>:/<graylog_home>/graylog-collector/config``  
+ ``pscp graylog_collector.conf root@<remote_logging_machine_ip>:/<graylog_home>/config``  
 
--- Starting graylog collector from command line  
+-- Starting graylog collector   
 * modify the config to point to the GL master server and use any new ports if any new inputs were created on the GL master.  
-* from the graylog home directory (installation directory) run:  
+* to start manually, from the graylog home directory (installation directory) run:  
  ``bin/graylog-collector run -f graylog_collector.conf``  
+* add to the startup script so the collector will start after reboots/restarts
 
 
 ##### Logstash Pipeline 
 To pipe old (not-current) log files into Graylog, use a logstash pipeline to process files individually and push entries to the master GL server. 
 
 -- Install Logstash  
-* download logstash  
+* cd to the applications home folder (for us, */ciminc/app/* and download the latest version of logstash  
  ``wget https://download.elastic.co/logstash/logstash/logstash-2.1.1.tar.gz``  
 
-* move the tar to /<logstash_intallation_path>/logstash-2.1.1 and unpack using:  
+* unpack using:  
  ``tar -zxvf logstash-2.1.1.tar.gz``  
+
+* rename the unpacked folder from *logstash-2.1.1* to *logstash* and delete the tar
 
 -- Setting up the config  
 * copy the sample logstash config to the installation directory (I used PuTTy):  
- ``pscp logstash_pipeline.conf root@<remote_logging_machine_ip>:/<logstash_home>/logstash-2.1.1``  
+ ``pscp logstash_pipeline.conf root@<remote_logging_machine_ip>:/<logstash_home>``  
 
--- Starting logstash pipeline from command line  
+-- Starting logstash pipeline  
 * modify the config to point to the GL master server and use any new ports if any new inputs were created on the GL master.  
 * modify the config for each logfile to pipe  
-* from the logstash home directory (installation directory) run:  
+* to start manually, from the logstash home directory (installation directory) run:  
  ``bin/logstash -f logstash_pipeline.conf``  
+* add to the startup script so the pipeline will start after reboots/restarts
 
 
 ### Sending Log Entries Directly from a Remote Application 
