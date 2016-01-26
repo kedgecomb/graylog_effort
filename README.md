@@ -128,6 +128,10 @@ An example appender using the GELF classes from Moocar:
                     <key>app_version</key>
                     <value>1.0.35</value>
                 </staticField>
+                <staticField class="me.moocar.logbackgelf.Field">
+                    <key>environment</key>
+                    <value>${ENVIRONMENT}</value>
+                </staticField>
             </layout>
         </encoder>
     </appender>
@@ -135,8 +139,9 @@ An example appender using the GELF classes from Moocar:
 
 There is a UDP version of the appender from MOOCAR also, (see the attached source).
 
-These appender configuration samples assume the use of three jvm arguments at the container level:
-  
+These appender configuration samples assume the use of four jvm arguments at the container level:
+
+*environment* - the environment in which the instance of the application is running ("DEV", "QA", or "PROD")  
 *graylog.server.ip* - the ip address of the Graylog master server  
 *graylog.server.port* - the port number of the *gelfappender_input* setup to receive this GELF input  
 *application_instance* - the instance of the running application (BIP-1, for instance)  
