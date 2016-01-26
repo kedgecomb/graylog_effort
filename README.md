@@ -38,6 +38,8 @@ For this reason, inputs should be named after the overall "flavor" of extraction
 *logback_default_extraction_input*  
 *glassfish_default_extraction_input*  
 *gelfappender_input*
+
+We've included extractor files for both the glassfish and the logback default message formats.  After each input is created, import the appropriate extractor, (cut and paste the contents of the appropriate file into the extractor import page of the graylog web app).
   
 
 Providing Input to the Master GL Server
