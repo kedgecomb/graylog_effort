@@ -66,7 +66,7 @@ To continuously watch a remote application's current logfile for new entries (th
 -- Starting graylog collector   
 * modify the config to point to the GL master server and use any new ports if any new inputs were created on the GL master.  
 * to start manually, from the graylog home directory (installation directory) run:  
- ``bin/graylog-collector run -f graylog_collector.conf``  
+ ``bin/graylog-collector run -f config/collector.conf``  
 * add to the startup script so the collector will start after reboots/restarts
 
 
